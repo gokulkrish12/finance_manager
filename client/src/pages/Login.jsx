@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext.jsx';
-import { Spinner } from '../components/ui.jsx';
+import { Spinner, PasswordInput } from '../components/ui.jsx';
 import AuthShell from '../components/AuthShell.jsx';
 
 export default function Login() {
@@ -45,7 +45,7 @@ export default function Login() {
         </div>
         <div>
           <label className="label">Password</label>
-          <input type="password" required className="input" value={form.password}
+          <PasswordInput required value={form.password}
             onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="••••••••" />
         </div>
         {mfaStep && (

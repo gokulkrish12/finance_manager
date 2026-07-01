@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import api from '../api/axios.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { CURRENCIES } from '../utils/format.js';
-import { Modal, Spinner } from '../components/ui.jsx';
+import { Modal, Spinner, PasswordInput } from '../components/ui.jsx';
 
 export default function Settings() {
   const { user, updateUser, logout } = useAuth();
@@ -144,11 +144,11 @@ export default function Settings() {
           <h3 className="font-semibold text-slate-700">Change password</h3>
           <div>
             <label className="label">Current password</label>
-            <input type="password" required className="input" value={pw.currentPassword} onChange={(e) => setPw({ ...pw, currentPassword: e.target.value })} />
+            <PasswordInput required value={pw.currentPassword} onChange={(e) => setPw({ ...pw, currentPassword: e.target.value })} />
           </div>
           <div>
             <label className="label">New password</label>
-            <input type="password" required className="input" value={pw.newPassword} onChange={(e) => setPw({ ...pw, newPassword: e.target.value })} placeholder="At least 6 characters" />
+            <PasswordInput required value={pw.newPassword} onChange={(e) => setPw({ ...pw, newPassword: e.target.value })} placeholder="At least 6 characters" />
           </div>
           <button type="submit" className="btn-primary" disabled={savingPw}>{savingPw ? <Spinner className="h-4 w-4 text-white" /> : 'Update password'}</button>
         </form>
@@ -192,7 +192,7 @@ export default function Settings() {
       <Modal open={disableModal} onClose={() => setDisableModal(false)} title="Disable two-factor authentication" maxWidth="max-w-sm">
         <form onSubmit={disableMfa} className="space-y-4">
           <p className="text-sm text-slate-500">Confirm your password to turn off 2FA.</p>
-          <input type="password" required className="input" value={disablePw} onChange={(e) => setDisablePw(e.target.value)} placeholder="Password" autoFocus />
+          <PasswordInput required value={disablePw} onChange={(e) => setDisablePw(e.target.value)} placeholder="Password" autoFocus />
           <div className="flex justify-end gap-2">
             <button type="button" className="btn-ghost" onClick={() => setDisableModal(false)}>Cancel</button>
             <button type="submit" className="btn-danger" disabled={mfaBusy}>{mfaBusy ? <Spinner className="h-4 w-4" /> : 'Disable 2FA'}</button>

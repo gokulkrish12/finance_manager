@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext.jsx';
-import { Spinner } from '../components/ui.jsx';
+import { Spinner, PasswordInput } from '../components/ui.jsx';
 import AuthShell from '../components/AuthShell.jsx';
 import { CURRENCIES } from '../utils/format.js';
 
@@ -45,7 +45,7 @@ export default function Register() {
         </div>
         <div>
           <label className="label">Password</label>
-          <input type="password" required className="input" value={form.password}
+          <PasswordInput required value={form.password}
             onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="At least 6 characters" />
         </div>
         <div>

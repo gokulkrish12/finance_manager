@@ -14,6 +14,15 @@ const NAV = [
   { to: '/settings', label: 'Settings', icon: '⚙️' },
 ];
 
+// Clean "log out" glyph (door + arrow), replaces the old emoji.
+const LogoutIcon = ({ className = 'h-5 w-5' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+    <polyline points="16 17 21 12 16 7" />
+    <line x1="21" y1="12" x2="9" y2="12" />
+  </svg>
+);
+
 const Layout = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -56,7 +65,7 @@ const Layout = () => {
         <div className="flex-1 overflow-y-auto py-2"><NavItems /></div>
         <div className="border-t border-slate-100 p-3">
           <button onClick={handleLogout} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-red-50 hover:text-red-600">
-            <span className="text-lg">🚪</span> Log out
+            <LogoutIcon /> Log out
           </button>
         </div>
       </aside>
@@ -73,7 +82,7 @@ const Layout = () => {
             <div className="flex-1 overflow-y-auto py-2"><NavItems /></div>
             <div className="border-t border-slate-100 p-3">
               <button onClick={handleLogout} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-red-50 hover:text-red-600">
-                <span className="text-lg">🚪</span> Log out
+                <LogoutIcon /> Log out
               </button>
             </div>
           </aside>
@@ -97,6 +106,14 @@ const Layout = () => {
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-100 font-semibold text-brand-700">
               {user?.name?.[0]?.toUpperCase() || 'U'}
             </div>
+            <button
+              onClick={handleLogout}
+              title="Log out"
+              aria-label="Log out"
+              className="ml-1 flex h-9 w-9 items-center justify-center rounded-full text-slate-500 ring-1 ring-slate-200 transition hover:bg-red-50 hover:text-red-600"
+            >
+              <LogoutIcon className="h-[18px] w-[18px]" />
+            </button>
           </div>
         </header>
 
